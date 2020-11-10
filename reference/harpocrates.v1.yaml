@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: harpocrates
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /users/:id:
+    get: 
+      summary: GET user
+      responses:
+        '200':
+          description: 'A successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: number
+                  githubUsername:
+                    type: string
+                  firstLogin:
+                    type: string
+                  mostRecentLogin:
+                    type: string
+      operationId: get-user
+  /users:
+    post: 
+      requestBody:
+        content:
+          application/json:
+              schema:
+                type: object
+                required: ['githubUsername']
+                additionalProperties: false
+                properties:
+                  githubUsername:
+                    type: string
+        required: true
+      responses:
+        '201':
+          description: 'User created'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: number
+      operationId: post-users
+  /collections:
+    post:
+      requestBody:
+        content:
+          application/json:
+              schema:
+                type: object
+                required: ['hello']
+                additionalProperties: false
+                properties:
+                  hello:
+                    type: string
+        required: true
+      responses:
+        '201':
+          description: 'Collection created'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hello:
+                    type: string
+      operationId: post-collections
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: 'A successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hello:
+                    type: string
+      operationId: get-collections
+components:
+  schemas: {}
